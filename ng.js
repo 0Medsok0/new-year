@@ -1,0 +1,209 @@
+// large Christmas tree
+let largeTree = document.createElement("img"); // создаем элемент
+largeTree.src = "https://images.vfl.ru/ii/1578131873/c44f2ab5/29101481_m.png";
+largeTree.style.position = "fixed";
+largeTree.style.left = "45%";
+largeTree.style.top = "70%";
+largeTree.style.transform = "translate(-50%, -50%)";
+document.body.appendChild(largeTree);
+
+//  small trees
+let smallTreeLeft = document.createElement("img");
+smallTreeLeft.src = "img/tree2-transformed.png";
+smallTreeLeft.style.position = "fixed";
+smallTreeLeft.style.left = "3%";
+smallTreeLeft.style.width = "17%";
+smallTreeLeft.style.transform = "translateX(65%) rotate(5deg)";
+smallTreeLeft.style.top = "65%";
+document.body.appendChild(smallTreeLeft);
+
+let smallTreeRight = document.createElement("img");
+smallTreeRight.src = "img/tree1.png";
+smallTreeRight.style.position = "fixed";
+smallTreeRight.style.left = "54%";
+smallTreeRight.style.top = "49%";
+smallTreeRight.style.width = "15%";
+smallTreeRight.style.transform = "translateX(65%) rotate(-8deg)";
+document.body.appendChild(smallTreeRight);
+
+// Add decorations (balls) to the trees
+function addDecorations(tree) {
+  for (let i = 0; i < 5; i++) {
+    let decoration = document.createElement("img");
+    decoration.src =
+      "https://w7.pngwing.com/pngs/182/651/png-transparent-christmas-ornament-christmas-decoration-red-christmas-balls-miscellaneous-decor-ball.png"; // Replace with the actual image url
+    decoration.style.position = "absolute";
+    decoration.style.left = `${Math.floor(Math.random() * 80) + 10}%`;
+    decoration.style.top = `${Math.floor(Math.random() * 40) + 40}%`;
+    tree.appendChild(decoration);
+  }
+}
+
+addDecorations(largeTree);
+addDecorations(smallTreeLeft);
+addDecorations(smallTreeRight);
+
+// garland
+let garland = document.createElement("div");
+garland.style.position = "fixed";
+garland.style.top = "50%";
+garland.style.left = "5%";
+garland.style.transform = "translateX(-32%) rotate(69deg)";
+garland.style.display = "flex";
+document.body.appendChild(garland);
+
+// multicolored lights garland
+function addLights(garland) {
+  for (let i = 0; i < 10; i++) {
+    let light = document.createElement("div");
+    light.style.width = "13px";
+    light.style.height = "13px";
+    light.style.borderRadius = "50%";
+    light.style.backgroundColor = `rgb(${Math.floor(
+      Math.random() * 256
+    )}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
+      Math.random() * 256
+    )})`;
+    light.style.margin = "0 5px";
+    garland.appendChild(light);
+  }
+}
+
+addLights(garland);
+
+// Set interval to change garland lights' color every 2 seconds
+setInterval(() => {
+  let lights = garland.children;
+  for (let i = 0; i < lights.length; i++) {
+    lights[i].style.backgroundColor = `rgb(${Math.floor(
+      Math.random() * 256
+    )}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
+      Math.random() * 256
+    )})`;
+  }
+}, 2000);
+
+// After 20 seconds, Santa says "Happy New Year!"
+setTimeout(() => {
+  let santa = document.createElement("img");
+  santa.src = "img/san.png";
+  santa.style.position = "absolute";
+  santa.style.left = "45%";
+  santa.style.top = "5%";
+  santa.style.width = "25%";
+  document.body.appendChild(santa);
+  setTimeout(() => {
+    santa.style.transform = "translateX(-100%)";
+    setTimeout(() => {
+      santa.remove();
+      alert("С Новым Годом!");
+    }, 1000);
+  }, 5000);
+}, 20000);
+
+// Снежинки
+function createSnowFlake() {
+  let snowFlake = document.createElement("img");
+  snowFlake.src = "img/sneg.png";
+  snowFlake.style.position = "fixed";
+  snowFlake.style.top = "-20px";
+  snowFlake.classList.add("snow-flake");
+  snowFlake.style.left = `${Math.random() * window.innerWidth}px`;
+  // snowFlake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+  snowFlake.style.animationDuration = `${Math.random() * 8 + 4}s`;
+  document.body.appendChild(snowFlake);
+
+  setTimeout(() => {
+    snowFlake.remove();
+  }, 5000); // 10000
+}
+
+setInterval(() => {
+  createSnowFlake();
+}, 500); // 1000
+
+// Салют
+
+// Create and launch the fireworks
+function createFirework() {
+  let firework = document.createElement("div");
+  firework.classList.add("firework");
+  firework.style.backgroundColor = `rgb(${Math.floor(
+    Math.random() * 256
+  )}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+  firework.style.left = "78%"; // сдвиг салюта --> чтобы стрелял рандомно `${Math.random() * window.innerWidth}px`
+  document.body.appendChild(firework);
+
+  setTimeout(() => {
+    firework.style.height = `${200}px`; // высота петарды
+    firework.style.width = "4px"; //ширина петарды
+    firework.style.bottom = "100%";
+  }, 100);
+
+  setTimeout(() => {
+    firework.remove();
+  }, 5000);
+}
+
+// интервал для создания фейерверков с интервалами
+
+// взрыв буед после каждых 2 залпов фейрверка
+let fireworkCounter = 0;
+let fireworkInterval = setInterval(() => {
+  createFirework();
+  fireworkCounter++;
+  if (fireworkCounter % 2 === 0) {
+    createExplosion(window.innerWidth / 2, window.innerHeight / 2);
+  }
+}, 2000);
+
+// let fireworkInterval = setInterval(() => {
+//   createFirework();
+// }, 2000);
+
+// Остановка запуска после 12 залпов
+
+setTimeout(() => {
+  clearInterval(fireworkInterval);
+}, 24000);
+
+// Эффект взрыва с помощью искр и свечения
+function createExplosion(x, y) {
+  let explosion = document.createElement("div");
+  explosion.classList.add("explosion");
+  explosion.style.left = x + 10 + "px"; // Position the explosion at the specified x-coordinate
+  explosion.style.top = y - 350 + "px"; // Position the explosion at the specified y-coordinate
+
+  document.body.appendChild(explosion);
+
+  //  Добаляем искры
+
+  for (let i = 0; i < 50; i++) {
+    let spark = document.createElement("div");
+    spark.classList.add("spark");
+    spark.style.backgroundColor = `rgb(${Math.floor(
+      Math.random() * 256
+    )}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
+      Math.random() * 256
+    )})`;
+    spark.style.left = "50%";
+    spark.style.top = "50%";
+    explosion.appendChild(spark);
+  }
+
+  // Добвляем свечение
+  let glow = document.createElement("div");
+  glow.classList.add("glow");
+  explosion.appendChild(glow);
+
+  // Автоматическое уадление взрыва после истечения времени
+  setTimeout(() => {
+    explosion.remove();
+  }, 3000);
+}
+
+// Запускаем взрыв в конце фейерверка
+
+setTimeout(() => {
+  createExplosion(window.innerWidth / 2, window.innerHeight / 2);
+}, 24000);
