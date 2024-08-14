@@ -1,0 +1,255 @@
+div.fon {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+}
+
+.fon img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+}
+/*Анимация для дыма*/
+.smoke-home .smoke {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  margin-left: 28%;
+  margin-top: 24%;
+  border-radius: 65%;
+  box-shadow: 0 0 20px lightgray;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(206, 220, 231, 1) 33%,
+    rgba(89, 106, 114, 0) 100%
+  );
+  top: 120px;
+  left: 20px;
+  -webkit-animation: sm-mv 2.3s linear infinite;
+}
+/* Траектория движения дыма */
+
+@-webkit-keyframes sm-mv {
+  0% {
+    top: 120px;
+    left: 20px;
+  }
+  20% {
+    top: 107px;
+    left: 25px;
+  }
+  30% {
+    top: 95px;
+    left: 35px;
+    opacity: 0.9;
+  }
+  40% {
+    top: 80px;
+    left: 40px;
+  }
+  50% {
+    top: 65px;
+    left: 50px;
+  }
+  60% {
+    top: 50px;
+    left: 62px;
+  }
+  70% {
+    top: 35px;
+    left: 75px;
+  }
+  80% {
+    top: 25px;
+    left: 90px;
+  }
+  90% {
+    top: 15px;
+    left: 117px;
+  }
+  100% {
+    top: 7px;
+    left: 127px;
+    opacity: 0;
+    width: 90px;
+    height: 60px;
+  }
+}
+
+.smoke-home .smoke:nth-child(2) {
+  -webkit-animation: sm-mv 1.5s linear infinite;
+}
+.smoke-home .smoke:nth-child(3) {
+  -webkit-animation: sm-mv 1.7s linear infinite;
+}
+.smoke-home .smoke:nth-child(4) {
+  -webkit-animation: sm-mv 1.9s linear infinite;
+}
+.smoke-home .smoke:nth-child(5) {
+  -webkit-animation: smk-mv 0.1s linear infinite;
+}
+.smoke-home .smoke:nth-child(6) {
+  -webkit-animation: sm-mv 2.4s linear infinite;
+}
+.smoke-home .smoke:nth-child(7) {
+  -webkit-animation: sm-mv 2.9s linear infinite;
+}
+
+/* анимация для снежинок*/
+.snow-flake {
+  position: absolute;
+  animation: fall 10s linear infinite; /* Define the animation properties for the snowflake */
+  width: 2.5%;
+}
+@keyframes fall {
+  0% {
+    transform: translateY(-20px); /* Initial position of the snowflake */
+  }
+  100% {
+    transform: translateY(
+      100vh
+    ); /* Final position of the snowflake (falls to the bottom of the viewport) */
+  }
+}
+
+/* тень для месяца */
+
+.moon-shadow {
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-360%) translateY(-375%);
+  width: 165px;
+  height: 160px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px 20px rgba(255, 255, 255, 0.7); /* Circular light shadow */
+  animation: glow 2s ease-in-out infinite; /* Glowing effect animation */
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 20px 20px rgba(255, 250, 205, 0.7);
+  }
+  25% {
+    box-shadow: 0 0 30px 20px rgba(255, 255, 153, 1);
+  }
+  50% {
+    box-shadow: 0 0 30px 25px rgba(255, 250, 205, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 20px 20px rgba(255, 255, 153, 0.7);
+  }
+}
+
+/* тень для елок */
+.large-tree {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-65%) translateY(-360%);
+  bottom: 0;
+  width: 500px;
+  filter: blur(2px); /* Apply the blur effect to the shadow */
+  box-shadow: 0 0 20px 10px rgba(128, 0, 128, 0.8); /* Purple blurred shadow for large tree */
+}
+
+/* firework */
+
+.firework {
+  position: absolute;
+  border-radius: 50%;
+  bottom: 0;
+  transition: height 1s, width 1s, bottom 2s;
+  animation: moveUp 3s forwards;
+}
+@keyframes moveUp {
+  0% {
+    bottom: 25%;
+  }
+  100% {
+    bottom: 65%;
+  }
+}
+
+/* explosion, sparks, and glow */
+
+/* взрыв */
+.explosion {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-left: 27%;
+  /* margin-bottom: 70%; */
+  transform: translate(-50%, -50%);
+  background-color: rgba(238, 32, 77, 0.75);
+  animation: explosionAnimation 3s;
+}
+
+@keyframes explosionAnimation {
+  0% {
+    transform: translate(-60%, -60%) scale(0);
+  }
+  25% {
+    transform: matrix3d(-58%, -58%) scale3d(0.3);
+  }
+  100% {
+    transform: translate(-55%, -55%) scale(0.6);
+  }
+}
+/* искры */
+.spark {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: aqua;
+  animation: sparkAnimation 3s infinite;
+}
+
+@keyframes sparkAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+/* свечение */
+.glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-left: 40%;
+  margin-top: 40%;
+  background-color: rgba(168, 228, 160, 0.43);
+  animation: glowAnimation 3s infinite;
+}
+
+@keyframes glowAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 20px 20px rgba(66, 170, 255, 0.4);
+  }
+  25% {
+    transform: matrix3d(15%, 25%) scale3d(1);
+    box-shadow: 0 0 20px 20px rgba(68, 148, 74, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px 20px rgba(0, 40, 255, 0.5);
+  }
+  75% {
+    box-shadow: 0 0 20px 20px rgba(155, 45, 48, 0.6);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    box-shadow: 0 0 20px 20px rgba(225, 215, 0, 0.7);
+  }
+}
